@@ -1,0 +1,17 @@
+query products {
+  products {
+    id
+    price
+    product{
+      name
+      slug
+      description
+    
+  }
+    attrs{
+      name
+      value
+    }
+  }
+   
+}
