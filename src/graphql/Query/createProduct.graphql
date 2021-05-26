@@ -2,16 +2,14 @@
 
 # Write your query or mutation here
 mutation createProduct($input:CreateProductInput!) {
-  createProduct(input:$input)
-  {
-id 
+  createProduct(input:$input){
+   id
     price
-    product{
+    attrs{
       name
-      description
-      slug
+      value
     }
-  }
+  }}
+
   
   
-}

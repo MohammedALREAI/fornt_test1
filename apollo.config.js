@@ -4,7 +4,7 @@ module.exports = {
       tagName: "gql",
       service: {
         name: "product",
-        url: "http://localhost:9000/api",
+        url: "http://localhost:8080/api",
       },
   
     },

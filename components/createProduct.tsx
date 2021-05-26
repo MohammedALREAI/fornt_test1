@@ -3,16 +3,12 @@ import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useCreateProductMutation } from "../src/generated/graphql";
 import { useFormik } from "formik";
-import { useRouter } from 'next/router'
-
-
 
 interface IForm{
-  product:{
-    name:string,
+    name_product:string,
     description:string
-  }
-  ,price:number,
+  ,
+  price:number,
   attrs:[{
     name:string,
     value:string
@@ -25,14 +21,12 @@ export const CreateProduct = () => {
     {
       // ther is missing data
       onCompleted:(data)=>{
-        const {createProduct:{price,product,id}} =data
-        if(product){
-          const router = useRouter()
+        const {createProduct:{price,id}} =data
+         
 
-          alert(` the product item create success for  ${product.name}`);
-          router.push('/product/index')
+          alert(` the product item create success for  `);
 
-        }
+        
       }
     }
 ,
@@ -44,22 +38,22 @@ export const CreateProduct = () => {
   const formik = useFormik<IForm>({
     initialValues: {
      price:0,
-     product:{
-       name:"",
-       description:""
-     },
+      name_product:"",
+       description:"",
+     
      attrs:[{
        name:"",
        value:""
      }]
     },
     onSubmit: (values) => {
-
+console.log( "the prosuct is",values.description)
       createProductMutation({
         variables:{input:{
           products:{
-            name:values.product.name,
-            description:values.product.description
+            name:values.name_product,
+            description:values.description,
+          
           },
           price:values.price,
           attrs:values.attrs
@@ -96,13 +90,13 @@ export const CreateProduct = () => {
                       </label>
                       <input
                         type="text"
-                        name="name"
+                        name="name_product"
                         onChange={formik.handleChange}
-                        value={formik.values.product.name}
+                        defaultValue={formik.values.name_product}
                         id="name_product"
                         autoComplete="given-name"
                         // eslint-disable-next-line max-len
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                     <div className="col-span-6 sm:col-span-3">
@@ -117,10 +111,10 @@ export const CreateProduct = () => {
                         type="text"
                         name="description"
                         onChange={formik.handleChange}
-                        value={formik.values.product.description}
+                        defaultValue={formik.values.description}
                         id="description"
                         autoComplete="given-description"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1   h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                     <div className="col-span-6 sm:col-span-3">
@@ -135,9 +129,9 @@ export const CreateProduct = () => {
                         name="price"
                         id="price"
                         onChange={formik.handleChange}
-                        value={formik.values.price}
+                        defaultValue={formik.values.price}
                         autoComplete="given-price"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1  h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                     <div className="col-span-6 sm:col-span-3 lg:col-span-2" />
@@ -150,12 +144,12 @@ export const CreateProduct = () => {
                       </label>
                       <input
                         onChange={formik.handleChange}
-                        value={formik.values.attrs[0].name}
+                        defaultValue={formik.values.attrs[0].name}
                         type="text"
                         name="name_arrts"
                         id="name_arrts"
                         autoComplete="given-name_arrts"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1  h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                     <div className="col-span-6 sm:col-span-3">
@@ -167,12 +161,12 @@ export const CreateProduct = () => {
                       </label>
                       <input
                           onChange={formik.handleChange}
-                          value={formik.values.attrs[0].value}
+                          defaultValue={formik.values.attrs[0].value}
                         type="text"
                         name="value_arrts"
                         id="value_arrts"
                         autoComplete="given-value_arrts"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1  h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                   </div>
